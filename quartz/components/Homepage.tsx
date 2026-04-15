@@ -45,13 +45,13 @@ const Homepage: QuartzComponent = ({ fileData, displayClass }: QuartzComponentPr
       icon: "◎",
       name: "Instagram",
       desc: "AI 카드뉴스",
-      href: "https://www.instagram.com/metalai.lab",
+      href: "https://www.instagram.com/metalailab/",
     },
     {
       icon: "@",
       name: "Threads",
       desc: "매일 AI 인사이트",
-      href: "https://www.threads.net/@metalai.lab",
+      href: "https://www.threads.com/@metalailab",
     },
     {
       icon: "✕",

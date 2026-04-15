@@ -10,8 +10,8 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       "YouTube": "https://www.youtube.com/@metalailab",
-      "Threads": "https://www.threads.net/@metalai.lab",
-      "Instagram": "https://www.instagram.com/metalai.lab",
+      "Threads": "https://www.threads.com/@metalailab",
+      "Instagram": "https://www.instagram.com/metalailab/",
       "X (Twitter)": "https://x.com/metalailab",
     },
   }),
