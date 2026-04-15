@@ -1,10 +1,9 @@
 @use "./base.scss";
 
-// ===== METAL AI · "Minimal + Impact" Design System =====
-// Brand: #19297B (Navy Blue) + Warm Cream Background
-// Inspired by: Anthropic/Claude aesthetic
-// Design Philosophy: 따뜻한 미니멀, 편지지 감성, 지적인 품격
-// Note: Fonts loaded via Head component (Newsreader, Pretendard CDN)
+// ===== METAL AI · "Minimal + Impact" — Prototype-Faithful Layout =====
+// Single-column centered layout matching metalai-prototype.html
+// Design: Anthropic/Claude aesthetic, warm cream editorial
+// Typography: Noto Serif KR (headings), Pretendard (body), Newsreader (logo)
 
 // --- Design Tokens ---
 :root {
@@ -21,71 +20,138 @@
   --font-heading: 'Noto Serif KR', 'Newsreader', Georgia, serif;
   --font-body: 'Pretendard', -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --layout-width: 1100px;
+  --content-width: 680px;
 }
 
-// --- Global Body Override ---
+// ============================================================
+// 1. SINGLE-COLUMN LAYOUT OVERRIDE
+//    Kill the 3-column grid, force everything to single centered column
+// ============================================================
+
 body {
   font-family: var(--font-body) !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// --- Page Title (Logo Area) ---
-.page-title {
-  font-family: 'Newsreader', serif !important;
-  font-size: 1.3rem !important;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  text-shadow: none;
-  font-weight: 700;
-  color: var(--brand-navy) !important;
+// Force single column by overriding Quartz's grid
+#quartz-body {
+  display: block !important;
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-// --- Article Title ---
+// Hide sidebars completely
+.sidebar.left,
+.sidebar.right {
+  display: none !important;
+}
+
+// Center column takes full width
+.center {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: 100%;
+  margin: 0 auto;
+}
+
+// ============================================================
+// 2. TOP NAVIGATION BAR (Proto: logo left, nav right)
+// ============================================================
+
+.page-header {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--layout-width);
+  margin: 0 auto !important;
+  padding: 32px 0;
+  width: 100%;
+}
+
+// Logo styling
+.page-title {
+  font-size: 1.75rem;
+  margin: 0;
+  order: -1;
+}
+
+.page-title a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.page-logo {
+  height: 28px;
+  width: auto;
+  margin: 0;
+  border-radius: 0 !important;
+}
+
+// Search & Darkmode in header — compact
+.page-header .flex-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-bar {
+  max-width: 200px;
+}
+
+.search-bar input {
+  border-radius: 4px;
+  border: 1px solid var(--color-border-default);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  background: var(--color-bg-secondary);
+  transition: border-color 0.15s ease;
+
+  &:focus {
+    border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px rgba(25, 41, 123, 0.1);
+    outline: none;
+  }
+}
+
+.darkmode {
+  padding: 4px;
+}
+
+// ============================================================
+// 3. CONTENT — Prototype-faithful typography
+// ============================================================
+
 h1.article-title {
-  font-family: var(--font-heading) !important;
-  font-size: 2.2rem;
+  font-family: 'Newsreader', var(--font-heading) !important;
+  font-size: 2.8rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  line-height: 1.25;
+  line-height: 1.15;
   text-shadow: none;
   color: var(--color-text-primary);
+  margin-bottom: 8px;
+  max-width: var(--content-width);
 }
 
-// --- Headings ---
+.content-meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  max-width: var(--content-width);
+}
+
 h1, h2, h3, h4, h5, h6, thead {
   font-family: var(--font-heading) !important;
   text-shadow: none;
 }
 
-// --- Links ---
-a {
-  transition: color 0.15s ease;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(25, 41, 123, 0.3);
-
-  &:hover {
-    text-shadow: none;
-    text-decoration-color: var(--brand-navy);
-  }
-}
-
-a.internal {
-  background-color: transparent;
-  padding: 0;
-  border-radius: 0;
-  text-decoration: underline;
-  text-decoration-color: rgba(25, 41, 123, 0.2);
-  text-underline-offset: 3px;
-
-  &:hover {
-    text-decoration-color: var(--brand-navy);
-  }
-}
-
-// --- Content Area ---
+// Article body — optimal reading width centered
 article {
+  max-width: var(--content-width);
+  margin: 0 auto;
   line-height: 1.85;
   font-size: 17px;
 
@@ -105,7 +171,6 @@ article {
     color: var(--color-text-primary);
   }
 
-  // --- Blockquote (Editorial Style) ---
   blockquote {
     border-left: 3px solid var(--brand-navy);
     background: var(--color-bg-tertiary);
@@ -119,7 +184,6 @@ article {
     line-height: 1.7;
   }
 
-  // --- Table (Clean Minimal) ---
   table {
     border-collapse: collapse;
     width: 100%;
@@ -150,7 +214,6 @@ article {
     }
   }
 
-  // --- Code (Clean Monospace) ---
   code {
     font-family: var(--font-mono) !important;
     font-size: 0.85em;
@@ -184,31 +247,39 @@ article {
   }
 }
 
-// --- Graph View ---
-.graph > svg {
-  border: 1px solid var(--color-border-default);
-  border-radius: 4px;
-  background: var(--color-bg-secondary);
-}
+// ============================================================
+// 4. LINKS
+// ============================================================
 
-// --- Search Box ---
-.search-bar input {
-  border-radius: 4px;
-  border: 1px solid var(--color-border-default);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  padding: 0.5rem 0.8rem;
-  background: var(--color-bg-secondary);
-  transition: border-color 0.15s ease;
+a {
+  transition: color 0.15s ease;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(25, 41, 123, 0.3);
 
-  &:focus {
-    border-color: var(--brand-navy);
-    box-shadow: 0 0 0 3px rgba(25, 41, 123, 0.1);
-    outline: none;
+  &:hover {
+    text-shadow: none;
+    text-decoration-color: var(--brand-navy);
   }
 }
 
-// --- Tag Pills ---
+a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 41, 123, 0.2);
+  text-underline-offset: 3px;
+
+  &:hover {
+    text-decoration-color: var(--brand-navy);
+  }
+}
+
+// ============================================================
+// 5. TAG PILLS
+// ============================================================
+
 a.internal.tag-link {
   border-radius: 2px;
   border: 1px solid var(--color-border-default);
@@ -230,7 +301,10 @@ a.internal.tag-link {
   }
 }
 
-// --- Footer ---
+// ============================================================
+// 6. FOOTER — Clean centered
+// ============================================================
+
 footer {
   font-family: var(--font-body);
   font-size: 0.85rem;
@@ -240,57 +314,29 @@ footer {
   padding-top: 1.5rem;
   margin-top: 3rem;
   color: var(--color-text-secondary);
+  max-width: var(--layout-width);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-// --- HR Dividers ---
-hr {
-  border: none;
-  border-top: 1px solid var(--color-border-default);
-  margin: 2.5rem 0;
+// ============================================================
+// 7. NEWSLETTER
+// ============================================================
+
+.newsletter-section {
+  max-width: var(--content-width) !important;
+  margin: 3rem auto 0 !important;
 }
 
-// --- Backlinks ---
-.backlinks {
-  border: 1px solid var(--color-border-default);
-  border-radius: 4px;
-  padding: 1rem 1.2rem;
-  background: var(--color-bg-secondary);
+// ============================================================
+// 8. BREADCRUMBS
+// ============================================================
 
-  & > h3 {
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 0.8rem;
-    color: var(--color-text-secondary);
-  }
-}
-
-// --- Explorer ---
-.explorer {
-  border: 1px solid var(--color-border-default);
-  border-radius: 4px;
-  padding: 0.75rem;
-  box-shadow: none;
-  background: var(--color-bg-secondary);
-}
-
-// --- Table of Contents ---
-.toc .depth-1 > li {
-  font-weight: 600;
-}
-
-// --- Content Meta ---
-.content-meta {
-  color: var(--color-text-secondary);
-  font-size: 0.9rem;
-}
-
-// --- Breadcrumbs ---
 .breadcrumb-container {
   font-size: 0.85rem;
   color: var(--color-text-secondary);
+  max-width: var(--content-width);
+  margin: 0 auto;
 
   a {
     color: var(--color-text-secondary);
@@ -302,35 +348,60 @@ hr {
   }
 }
 
-// --- Image styling ---
+// ============================================================
+// 9. DIVIDERS & IMAGES & SELECTION
+// ============================================================
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border-default);
+  margin: 2.5rem 0;
+}
+
 img {
   border-radius: 4px;
 }
 
-// --- Selection ---
 ::selection {
   background: rgba(25, 41, 123, 0.15);
   color: var(--color-text-primary);
 }
 
-// --- Navigation Progress Bar ---
-.navigation-progress {
-  height: 2px;
-  background: var(--brand-navy);
+// ============================================================
+// 10. HIDE SIDEBAR COMPONENTS (safety net)
+// ============================================================
+
+.graph,
+.explorer,
+.toc,
+.backlinks {
+  display: none !important;
 }
 
-// --- Responsive ---
+// ============================================================
+// 11. RESPONSIVE
+// ============================================================
+
 @media (max-width: 800px) {
   h1.article-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
-  .page-title {
-    font-size: 1.1rem !important;
+  .page-header {
+    flex-direction: row;
+    padding: 20px 0;
+  }
+
+  .page-logo {
+    height: 24px !important;
   }
 
   article {
     font-size: 16px;
     line-height: 1.8;
+  }
+
+  #quartz-body {
+    padding: 0 16px;
   }
 }
