@@ -59,13 +59,24 @@ body {
 // 3. TOP NAVIGATION — Proto: logo left + links right
 // ============================================================
 .page-header {
-  display: flex !important;
-  justify-content: space-between;
-  align-items: center;
+  display: block !important;
   max-width: var(--layout-width);
   margin: 0 auto !important;
-  padding: 32px 0;
   width: 100%;
+
+  // The <header> inside page-header contains NavLinks
+  > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0;
+    width: 100%;
+  }
+
+  // The .popover-hint inside page-header contains beforeBody (Homepage)
+  > .popover-hint {
+    width: 100%;
+  }
 }
 
 // ============================================================
