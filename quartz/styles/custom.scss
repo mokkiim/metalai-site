@@ -1,11 +1,10 @@
 @use "./base.scss";
 
-// ===== METAL AI · "Minimal + Impact" — Prototype-Faithful Layout =====
-// Single-column centered layout matching metalai-prototype.html
-// Design: Anthropic/Claude aesthetic, warm cream editorial
-// Typography: Noto Serif KR (headings), Pretendard (body), Newsreader (logo)
+// ===== METAL AI · Prototype-Faithful "Minimal + Impact" =====
+// 100% matching metalai-prototype.html
+// Single-column · 1100px max · Anthropic warm cream editorial
 
-// --- Design Tokens ---
+// --- Design Tokens (matching prototype :root) ---
 :root {
   --brand-navy: #19297B;
   --brand-navy-light: #2D3F9E;
@@ -25,17 +24,19 @@
 }
 
 // ============================================================
-// 1. SINGLE-COLUMN LAYOUT OVERRIDE
-//    Kill the 3-column grid, force everything to single centered column
+// 1. GLOBAL BODY
 // ============================================================
-
 body {
   font-family: var(--font-body) !important;
+  font-size: 16px;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Force single column by overriding Quartz's grid
+// ============================================================
+// 2. SINGLE-COLUMN LAYOUT — Kill Quartz 3-col grid
+// ============================================================
 #quartz-body {
   display: block !important;
   max-width: var(--layout-width);
@@ -43,24 +44,20 @@ body {
   padding: 0 24px;
 }
 
-// Hide sidebars completely
 .sidebar.left,
 .sidebar.right {
   display: none !important;
 }
 
-// Center column takes full width
 .center {
   max-width: 100% !important;
   min-width: 0 !important;
   width: 100%;
-  margin: 0 auto;
 }
 
 // ============================================================
-// 2. TOP NAVIGATION BAR (Proto: logo left, nav right)
+// 3. TOP NAVIGATION — Proto: logo left + links right
 // ============================================================
-
 .page-header {
   display: flex !important;
   justify-content: space-between;
@@ -71,119 +68,95 @@ body {
   width: 100%;
 }
 
-// Logo styling
-.page-title {
-  font-size: 1.75rem;
-  margin: 0;
-  order: -1;
-}
-
-.page-title a {
-  display: inline-flex;
-  align-items: center;
-}
-
-.page-logo {
-  height: 28px;
-  width: auto;
-  margin: 0;
-  border-radius: 0 !important;
-}
-
-// Search & Darkmode in header — compact
-.page-header .flex-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.search-bar {
-  max-width: 200px;
-}
-
-.search-bar input {
-  border-radius: 4px;
-  border: 1px solid var(--color-border-default);
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  padding: 6px 12px;
-  background: var(--color-bg-secondary);
-  transition: border-color 0.15s ease;
-
-  &:focus {
-    border-color: var(--brand-navy);
-    box-shadow: 0 0 0 3px rgba(25, 41, 123, 0.1);
-    outline: none;
-  }
-}
-
-.darkmode {
-  padding: 4px;
+// ============================================================
+// 4. HIDE SIDEBAR COMPONENTS (safety)
+// ============================================================
+.graph,
+.explorer,
+.toc,
+.backlinks {
+  display: none !important;
 }
 
 // ============================================================
-// 3. CONTENT — Prototype-faithful typography
+// 5. HEADINGS — All serif
 // ============================================================
-
-h1.article-title {
-  font-family: 'Newsreader', var(--font-heading) !important;
-  font-size: 2.8rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  text-shadow: none;
-  color: var(--color-text-primary);
-  margin-bottom: 8px;
-  max-width: var(--content-width);
-}
-
-.content-meta {
-  color: var(--color-text-secondary);
-  font-size: 0.9rem;
-  max-width: var(--content-width);
-}
-
 h1, h2, h3, h4, h5, h6, thead {
   font-family: var(--font-heading) !important;
   text-shadow: none;
 }
 
-// Article body — optimal reading width centered
+// ============================================================
+// 6. ARTICLE TITLE — Newsreader hero feel
+// ============================================================
+h1.article-title {
+  font-family: 'Newsreader', var(--font-heading) !important;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-shadow: none;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+}
+
+.content-meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+// ============================================================
+// 7. ARTICLE BODY — 680px reading width
+// ============================================================
 article {
   max-width: var(--content-width);
   margin: 0 auto;
   line-height: 1.85;
   font-size: 17px;
 
+  // --- Homepage article gets full width ---
+  // (Quartz renders index.md content inside article)
+
   h2 {
-    font-size: 1.6rem;
-    margin-top: 3rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--color-border-default);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 14px;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 48px;
+    margin-bottom: 32px;
+    padding-bottom: 0;
+    border-bottom: none;
   }
 
   h3 {
+    font-family: 'Noto Serif KR', serif;
     font-size: 1.25rem;
     margin-top: 2.2rem;
     font-weight: 600;
     color: var(--color-text-primary);
   }
 
+  // Blockquote — editorial
   blockquote {
     border-left: 3px solid var(--brand-navy);
     background: var(--color-bg-tertiary);
-    padding: 1.2rem 1.5rem;
-    margin: 1.5rem 0;
+    padding: 20px 24px;
+    margin: 32px 0;
     border-radius: 0 4px 4px 0;
     box-shadow: none;
     font-family: var(--font-heading);
     font-style: italic;
-    font-size: 1.05rem;
+    font-size: 17px;
     line-height: 1.7;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 
+  // Table
   table {
     border-collapse: collapse;
     width: 100%;
@@ -200,7 +173,6 @@ article {
       font-weight: 600;
       padding: 0.75rem 1rem;
       text-align: left;
-      letter-spacing: 0.02em;
     }
 
     td {
@@ -214,43 +186,94 @@ article {
     }
   }
 
+  // Code
   code {
     font-family: var(--font-mono) !important;
     font-size: 0.85em;
     background: var(--color-bg-tertiary);
-    padding: 0.15rem 0.4rem;
+    padding: 2px 6px;
     border: none;
     border-radius: 3px;
     color: var(--brand-navy);
-  }
-
-  pre code {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    border: none;
-    border-radius: 4px;
-    box-shadow: none;
-    color: #F5F0E8;
-    background: #1A1714;
   }
 
   pre {
     background: #1A1714;
     border: none;
     border-radius: 4px;
-    padding: 1.2rem;
+    padding: 24px;
+    margin: 32px 0;
+    overflow-x: auto;
+
+    code {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #F5F0E8;
+      background: none;
+      padding: 0;
+    }
   }
 
   strong {
     color: var(--color-text-primary);
     font-weight: 600;
   }
+
+  p {
+    margin-bottom: 24px;
+  }
+
+  ul, ol {
+    margin: 16px 0 24px 24px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  // HR inside article
+  hr {
+    border: none;
+    border-top: 1px solid var(--color-border-default);
+    margin: 0;
+    // In prototype, dividers separate hero/recent/links sections
+  }
 }
 
 // ============================================================
-// 4. LINKS
+// 8. HOMEPAGE — Proto hero + sections (rendered from index.md)
+//    index.md content becomes: h1 (hero), h2 (section titles),
+//    ul (lists), blockquote, hr (dividers)
 // ============================================================
 
+// On homepage, article title is hidden (h1 inside article is the hero)
+// Quartz shows .article-title from frontmatter title
+// We want the content's h1 "METAL AI" to be the hero instead
+
+// Homepage: wider article for sections
+// The index page slug detection via CSS is limited,
+// but we can style the first h1 inside article as hero
+
+article > h1:first-child {
+  font-family: 'Newsreader', serif !important;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+// Subtitle style — the bold text after h1
+article > p:first-of-type strong {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+// ============================================================
+// 9. LINKS — Proto style
+// ============================================================
 a {
   transition: color 0.15s ease;
   text-decoration-thickness: 1px;
@@ -276,16 +299,28 @@ a.internal {
   }
 }
 
-// ============================================================
-// 5. TAG PILLS
-// ============================================================
+// Post content links (Anthropic blue underline style)
+article a {
+  color: var(--brand-navy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #B5C4E8;
+  transition: text-decoration-color 0.15s;
 
+  &:hover {
+    text-decoration-color: var(--brand-navy);
+  }
+}
+
+// ============================================================
+// 10. TAG PILLS — Proto-faithful
+// ============================================================
 a.internal.tag-link {
   border-radius: 2px;
   border: 1px solid var(--color-border-default);
-  padding: 0.15rem 0.6rem;
+  padding: 2px 10px;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-decoration: none;
@@ -296,47 +331,46 @@ a.internal.tag-link {
   &:hover {
     border-color: var(--brand-navy);
     color: var(--brand-navy);
-    background: transparent;
-    box-shadow: none;
   }
 }
 
 // ============================================================
-// 6. FOOTER — Clean centered
+// 11. NEWSLETTER — Centered
 // ============================================================
+.newsletter-section {
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  padding: 48px 32px !important;
+  text-align: center;
+  border-top: none !important;
+}
 
+// ============================================================
+// 12. FOOTER — Proto-faithful (flex, space-between)
+// ============================================================
 footer {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 13px;
   letter-spacing: 0;
   opacity: 1;
   border-top: 1px solid var(--color-border-default);
-  padding-top: 1.5rem;
-  margin-top: 3rem;
+  padding: 32px 0;
+  margin-top: 0;
   color: var(--color-text-secondary);
   max-width: var(--layout-width);
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 // ============================================================
-// 7. NEWSLETTER
+// 13. BREADCRUMBS
 // ============================================================
-
-.newsletter-section {
-  max-width: var(--content-width) !important;
-  margin: 3rem auto 0 !important;
-}
-
-// ============================================================
-// 8. BREADCRUMBS
-// ============================================================
-
 .breadcrumb-container {
   font-size: 0.85rem;
   color: var(--color-text-secondary);
-  max-width: var(--content-width);
-  margin: 0 auto;
 
   a {
     color: var(--color-text-secondary);
@@ -349,13 +383,12 @@ footer {
 }
 
 // ============================================================
-// 9. DIVIDERS & IMAGES & SELECTION
+// 14. HR & IMAGES & SELECTION
 // ============================================================
-
 hr {
   border: none;
   border-top: 1px solid var(--color-border-default);
-  margin: 2.5rem 0;
+  margin: 0;
 }
 
 img {
@@ -368,32 +401,23 @@ img {
 }
 
 // ============================================================
-// 10. HIDE SIDEBAR COMPONENTS (safety net)
+// 15. RESPONSIVE
 // ============================================================
-
-.graph,
-.explorer,
-.toc,
-.backlinks {
-  display: none !important;
-}
-
-// ============================================================
-// 11. RESPONSIVE
-// ============================================================
-
 @media (max-width: 800px) {
   h1.article-title {
-    font-size: 1.8rem;
+    font-size: 36px;
+  }
+
+  article > h1:first-child {
+    font-size: 36px !important;
   }
 
   .page-header {
-    flex-direction: row;
     padding: 20px 0;
   }
 
   .page-logo {
-    height: 24px !important;
+    height: 20px !important;
   }
 
   article {

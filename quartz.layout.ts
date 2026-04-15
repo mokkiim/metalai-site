@@ -5,12 +5,7 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [
     Component.PageTitle(),
-    Component.Flex({
-      components: [
-        { Component: Component.Search(), grow: true },
-        { Component: Component.Darkmode() },
-      ],
-    }),
+    Component.NavLinks(),
   ],
   afterBody: [Component.Newsletter()],
   footer: Component.Footer({

@@ -3,24 +3,19 @@ title: METAL AI
 date: 2026-04-15
 ---
 
-# METAL AI
-
 **Work with AI, Build with AI**
 
-AI Agent System × Content Automation × Experience Design
-
-AI로 일하는 방법을 연구하고 공유합니다.
-
-김현국 — METAL AI 대표 · AI 교육 · 콘텐츠 크리에이터
+AI 에이전트 시스템, 콘텐츠 자동화, 경험 디자인에 대한 주간 인사이트를 전합니다.
 
 ---
 
 ## Recent
 
-- [[about/index|About]] — METAL AI 소개
-- [[blog/index|Blog]] — AI/테크 인사이트, 실험, 생각들
-- [[wiki/index|Wiki]] — AI 지식 베이스 (디지털 가든)
-- [[education/index|Education]] — AI 교육 & 강의 자료
+- [[blog/2026-04-13-domain-knowledge-and-ai|도메인 지식과 AI: 왜 전문가가 AI를 더 잘 쓰는가]] — 2026.04.13
+- [[wiki/concepts/mcp-protocol|MCP (Model Context Protocol) 완전 가이드]] — 2026.04.10
+- [[wiki/concepts/vibe-coding|Vibe Coding (바이브 코딩) — 새로운 개발 패러다임]] — 2026.04.05
+
+---
 
 ## Links
 
@@ -28,6 +23,8 @@ AI로 일하는 방법을 연구하고 공유합니다.
 - [Threads↗](https://www.threads.net/@metalai.lab) — 매일 AI 인사이트
 - [Instagram↗](https://www.instagram.com/metalai.lab) — AI 카드뉴스
 - [X↗](https://x.com/metalailab) — AI 뉴스 & 트렌드
+
+---
 
 ## Products
 

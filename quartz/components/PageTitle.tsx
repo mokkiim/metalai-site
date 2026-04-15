@@ -21,15 +21,17 @@ PageTitle.css = `
 .page-title {
   font-size: 1.75rem;
   margin: 0;
+  flex-shrink: 0;
 }
 
 .page-title a {
   display: inline-flex;
   align-items: center;
+  text-decoration: none !important;
 }
 
 .page-logo {
-  height: 28px;
+  height: 24px;
   width: auto;
   margin: 0;
   border-radius: 0 !important;
