@@ -1,0 +1,87 @@
+.newsletter-container {
+  margin: 2rem 0;
+}
+
+.newsletter-box {
+  border: 2px solid var(--dark);
+  padding: 1.5rem;
+  background: var(--light);
+  box-shadow: 4px 4px 0px var(--dark);
+}
+
+.newsletter-title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.9rem;
+  color: #19297b;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 2px;
+}
+
+.newsletter-desc {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.85rem;
+  color: var(--darkgray);
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0;
+
+  input[type="email"] {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid var(--dark);
+    border-right: none;
+    font-family: "VT323", monospace;
+    font-size: 1rem;
+    background: var(--light);
+    color: var(--dark);
+    border-radius: 0;
+    outline: none;
+
+    &::placeholder {
+      color: var(--gray);
+      font-family: "VT323", monospace;
+    }
+
+    &:focus {
+      border-color: #19297b;
+    }
+  }
+
+  button[type="submit"] {
+    padding: 0.6rem 1.2rem;
+    background: #19297b;
+    color: white;
+    border: 2px solid #19297b;
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.55rem;
+    cursor: pointer;
+    border-radius: 0;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #0a0e1a;
+      border-color: #0a0e1a;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .newsletter-form {
+    flex-direction: column;
+
+    input[type="email"] {
+      border-right: 2px solid var(--dark);
+      border-bottom: none;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+    }
+  }
+}
