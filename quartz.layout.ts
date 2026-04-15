@@ -13,6 +13,7 @@ export const sharedPageComponents: SharedLayout = {
       "Threads": "https://www.threads.com/@metalailab",
       "Instagram": "https://www.instagram.com/metalailab/",
       "X (Twitter)": "https://x.com/metalailab",
+      "Mail": "mailto:kook@metal.co.kr",
     },
   }),
 }
