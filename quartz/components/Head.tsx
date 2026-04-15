@@ -50,6 +50,15 @@ export default (() => {
             )}
           </>
         )}
+        {/* Pretendard & Newsreader CDN for METAL AI Design System */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="naver-site-verification" content="6bf2eb69e7ca690ea7e67dbccb25771e424e34c4" />

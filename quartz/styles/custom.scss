@@ -1,230 +1,336 @@
 @use "./base.scss";
 
-// ===== METAL AI · 8-BIT PIXEL AESTHETIC =====
-// Brand: #19297b (Deep Navy Blue) + Retro Pixel Vibes
+// ===== METAL AI · "Minimal + Impact" Design System =====
+// Brand: #19297B (Navy Blue) + Warm Cream Background
+// Inspired by: Anthropic/Claude aesthetic
+// Design Philosophy: 따뜻한 미니멀, 편지지 감성, 지적인 품격
+// Note: Fonts loaded via Head component (Newsreader, Pretendard CDN)
 
-
-
-
-// --- Page Title ---
-h1.article-title {
-  font-size: 1.4rem;
-  letter-spacing: 0.02em;
-  line-height: 1.6;
-  text-shadow: 2px 2px 0px rgba(25, 41, 123, 0.15);
+// --- Design Tokens ---
+:root {
+  --brand-navy: #19297B;
+  --brand-navy-light: #2D3F9E;
+  --brand-navy-dark: #0F1A52;
+  --color-bg-primary: #F5F0E8;
+  --color-bg-secondary: #FAF8F4;
+  --color-bg-tertiary: #F0E6D8;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6560;
+  --color-border-default: #E5DED4;
+  --color-border-strong: #C8BFB2;
+  --font-heading: 'Noto Serif KR', 'Newsreader', Georgia, serif;
+  --font-body: 'Pretendard', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-// --- Site Header (Pixel Logo Style) ---
+// --- Global Body Override ---
+body {
+  font-family: var(--font-body) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// --- Page Title (Logo Area) ---
 .page-title {
-  font-size: 0.9rem !important;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 0px rgba(25, 41, 123, 0.2);
+  font-family: 'Newsreader', serif !important;
+  font-size: 1.3rem !important;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 700;
+  color: var(--brand-navy) !important;
 }
 
-// --- 8-Bit Pixel Border Style ---
-@mixin pixel-border($color: var(--secondary), $size: 3px) {
-  border: $size solid $color;
-  box-shadow: 
-    $size $size 0px 0px $color;
+// --- Article Title ---
+h1.article-title {
+  font-family: var(--font-heading) !important;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  text-shadow: none;
+  color: var(--color-text-primary);
 }
 
-// --- Explorer (Pixel Card) ---
-.explorer {
-  @include pixel-border(var(--lightgray));
-  border-radius: 0px; // Pixel = no radius!
-  padding: 0.5rem;
+// --- Headings ---
+h1, h2, h3, h4, h5, h6, thead {
+  font-family: var(--font-heading) !important;
+  text-shadow: none;
 }
 
-// --- Smooth Link Hover with Pixel Feel ---
+// --- Links ---
 a {
-  transition: all 0.15s ease;
-  text-decoration-thickness: 2px;
+  transition: color 0.15s ease;
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  
+  text-decoration-color: rgba(25, 41, 123, 0.3);
+
   &:hover {
-    color: var(--tertiary);
-    text-shadow: 1px 1px 0px rgba(25, 41, 123, 0.1);
+    text-shadow: none;
+    text-decoration-color: var(--brand-navy);
+  }
+}
+
+a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 41, 123, 0.2);
+  text-underline-offset: 3px;
+
+  &:hover {
+    text-decoration-color: var(--brand-navy);
   }
 }
 
 // --- Content Area ---
 article {
   line-height: 1.85;
-  
+  font-size: 17px;
+
   h2 {
-    margin-top: 2.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid var(--secondary);
-    font-size: 1rem;
-    letter-spacing: 0.04em;
+    font-size: 1.6rem;
+    margin-top: 3rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--color-border-default);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   h3 {
-    font-size: 0.85rem;
-    margin-top: 1.8rem;
-    color: var(--secondary);
+    font-size: 1.25rem;
+    margin-top: 2.2rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
   }
 
-  // --- Pixel Blockquote ---
+  // --- Blockquote (Editorial Style) ---
   blockquote {
-    @include pixel-border(var(--secondary), 2px);
-    border-radius: 0;
-    background: var(--highlight);
-    padding: 1rem 1.2rem;
-    font-family: 'VT323', monospace;
-    font-size: 1.3rem;
-    letter-spacing: 0.03em;
-    font-style: normal;
+    border-left: 3px solid var(--brand-navy);
+    background: var(--color-bg-tertiary);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+    box-shadow: none;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.7;
   }
 
-
-  // --- Pixel Table ---
+  // --- Table (Clean Minimal) ---
   table {
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
     width: 100%;
-    @include pixel-border(var(--secondary), 2px);
-    border-radius: 0;
+    border: 1px solid var(--color-border-default);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: none;
 
     th {
-      background: var(--secondary);
+      background: var(--brand-navy);
       color: white;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.55rem;
-      padding: 0.8rem 0.8rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
       text-align: left;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.02em;
     }
 
     td {
-      padding: 0.6rem 0.8rem;
-      border-bottom: 2px solid var(--lightgray);
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--color-border-default);
       font-size: 0.95rem;
     }
 
     tr:hover td {
-      background: var(--highlight);
+      background: var(--color-bg-tertiary);
     }
   }
 
-  // --- Code Blocks (VT323 Pixel Font) ---
+  // --- Code (Clean Monospace) ---
   code {
-    font-family: 'VT323', monospace;
-    font-size: 1.15rem;
-    background: var(--highlight);
-    padding: 0.1rem 0.4rem;
-    border: 1px solid var(--lightgray);
+    font-family: var(--font-mono) !important;
+    font-size: 0.85em;
+    background: var(--color-bg-tertiary);
+    padding: 0.15rem 0.4rem;
+    border: none;
+    border-radius: 3px;
+    color: var(--brand-navy);
   }
 
   pre code {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    @include pixel-border(var(--lightgray), 2px);
-    border-radius: 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #F5F0E8;
+    background: #1A1714;
+  }
+
+  pre {
+    background: #1A1714;
+    border: none;
+    border-radius: 4px;
+    padding: 1.2rem;
   }
 
   strong {
-    color: var(--secondary);
-    font-weight: 700;
+    color: var(--color-text-primary);
+    font-weight: 600;
   }
 }
 
-
-// --- Severance × 8-Bit: Clinical Retro Vibes ---
-
-// Graph View (Lumon Data Map Feel)
+// --- Graph View ---
 .graph > svg {
-  border: 2px solid var(--secondary);
-  border-radius: 0;
-  background: var(--light);
+  border: 1px solid var(--color-border-default);
+  border-radius: 4px;
+  background: var(--color-bg-secondary);
 }
 
-// --- Search Box (Lumon Terminal) ---
+// --- Search Box ---
 .search-bar input {
-  border-radius: 0;
-  border: 2px solid var(--secondary);
-  font-family: 'VT323', monospace;
-  font-size: 1.1rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-default);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
   padding: 0.5rem 0.8rem;
-  transition: all 0.2s ease;
-  
+  background: var(--color-bg-secondary);
+  transition: border-color 0.15s ease;
+
   &:focus {
-    border-color: var(--secondary);
-    box-shadow: 3px 3px 0px 0px var(--secondary);
+    border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px rgba(25, 41, 123, 0.1);
     outline: none;
   }
 }
 
-// --- Tag Pills (Department Badges) ---
+// --- Tag Pills ---
 a.internal.tag-link {
-  border-radius: 0;
-  border: 2px solid var(--secondary);
+  border-radius: 2px;
+  border: 1px solid var(--color-border-default);
   padding: 0.15rem 0.6rem;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  background: transparent;
   transition: all 0.15s ease;
-  
+
   &:hover {
-    background: var(--secondary);
-    color: white;
-    box-shadow: 2px 2px 0px 0px var(--secondary);
+    border-color: var(--brand-navy);
+    color: var(--brand-navy);
+    background: transparent;
+    box-shadow: none;
   }
 }
 
-// --- Footer (Severance End Credits) ---
+// --- Footer ---
 footer {
-  font-family: 'VT323', monospace;
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
-  opacity: 0.8;
-  border-top: 2px solid var(--secondary);
-  padding-top: 1.2rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  opacity: 1;
+  border-top: 1px solid var(--color-border-default);
+  padding-top: 1.5rem;
   margin-top: 3rem;
+  color: var(--color-text-secondary);
 }
 
-// --- HR Dividers (Lumon Floor Markers) ---
+// --- HR Dividers ---
 hr {
   border: none;
-  border-top: 3px solid var(--secondary);
-  margin: 2rem 0;
+  border-top: 1px solid var(--color-border-default);
+  margin: 2.5rem 0;
 }
 
-// --- Backlinks (Severance File Cabinet) ---
+// --- Backlinks ---
 .backlinks {
-  border: 2px solid var(--secondary);
-  border-radius: 0;
-  padding: 1rem;
-  
+  border: 1px solid var(--color-border-default);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  background: var(--color-bg-secondary);
+
   & > h3 {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.55rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     margin-bottom: 0.8rem;
+    color: var(--color-text-secondary);
   }
 }
 
-// --- Table of Contents (Lumon Department Guide) ---
+// --- Explorer ---
+.explorer {
+  border: 1px solid var(--color-border-default);
+  border-radius: 4px;
+  padding: 0.75rem;
+  box-shadow: none;
+  background: var(--color-bg-secondary);
+}
+
+// --- Table of Contents ---
 .toc .depth-1 > li {
   font-weight: 600;
 }
 
-// --- Cursor Blink Effect for Pixel Feel ---
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+// --- Content Meta ---
+.content-meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+// --- Breadcrumbs ---
+.breadcrumb-container {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+
+  a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--brand-navy);
+    }
+  }
+}
+
+// --- Image styling ---
+img {
+  border-radius: 4px;
+}
+
+// --- Selection ---
+::selection {
+  background: rgba(25, 41, 123, 0.15);
+  color: var(--color-text-primary);
+}
+
+// --- Navigation Progress Bar ---
+.navigation-progress {
+  height: 2px;
+  background: var(--brand-navy);
 }
 
 // --- Responsive ---
 @media (max-width: 800px) {
   h1.article-title {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
-  
+
   .page-title {
-    font-size: 0.7rem !important;
+    font-size: 1.1rem !important;
+  }
+
+  article {
+    font-size: 16px;
+    line-height: 1.8;
   }
 }

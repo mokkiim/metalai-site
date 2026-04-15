@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>METAL AI — Design Prototype v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Pretendard:wght@300;400;500;600&family=Newsreader:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #F5F0E8;
+    --surface: #FAF8F4;
+    --text: #1A1A1A;
+    --text-secondary: #6B6560;
+    --accent: #19297B;
+    --accent-hover: #0F1A52;
+    --border: #E5DED4;
+    --highlight: #F0E6D8;
+    --content-width: 680px;
+    --layout-width: 1100px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === NAV === */
+  nav {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 32px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Newsreader', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--text);
+  }
+
+  /* === PAGE SWITCHER === */
+  .page-switcher {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 0 24px 16px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .page-switcher button {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .page-switcher button.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .page-switcher button:hover:not(.active) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* === HERO === */
+  .hero {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 80px 24px 64px;
+  }
+
+  .hero h1 {
+    font-family: 'Newsreader', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .hero .subtitle {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .hero .description {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* === DIVIDER === */
+  .divider {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .divider hr {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* === SECTION === */
+  .section {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+  }
+
+  /* === POST LIST === */
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .post-item {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+
+  .post-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .post-item:hover {
+    background: var(--highlight);
+    margin: 0 -16px;
+    padding: 20px 16px;
+  }
+
+  .post-date {
+    font-size: 14px;
+    color: var(--text-secondary);
+    min-width: 120px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-title-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .post-tag {
+    font-size: 11px;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    padding: 2px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 16px;
+    white-space: nowrap;
+  }
+
+  /* === LINKS === */
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.15s;
+    background: var(--surface);
+  }
+
+  .link-card:hover {
+    border-color: var(--accent);
+  }
+
+  .link-card .link-icon {
+    font-size: 20px;
+    width: 32px;
+    text-align: center;
+  }
+
+  .link-card .link-name {
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .link-card .link-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* === NEWSLETTER === */
+  .newsletter {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  .newsletter-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 48px 32px;
+  }
+
+  .newsletter-inner h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .newsletter-inner p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-right: none;
+    background: var(--surface);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    border-radius: 4px 0 0 4px;
+    outline: none;
+  }
+
+  .newsletter-form input:focus {
+    border-color: var(--accent);
+  }
+
+  .newsletter-form input::placeholder {
+    color: #B5AFA8;
+  }
+
+  .newsletter-form button {
+    padding: 12px 24px;
+    background: var(--accent);
+    color: white;
+    border: 1px solid var(--accent);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+
+  .newsletter-form button:hover {
+    background: var(--accent-hover);
+  }
+
+  /* === FOOTER === */
+  footer {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .footer-left {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  footer .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  footer .footer-links a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  footer .footer-links a:hover {
+    color: var(--text);
+  }
+
+  /* === BLOG POST PAGE === */
+  .post-page {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 64px 24px;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .post-meta .tag {
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .post-meta .date {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .post-meta .reading-time {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .post-page h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .post-page .post-subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .post-content {
+    font-size: 17px;
+    line-height: 1.85;
+    color: #2A2A2A;
+  }
+
+  .post-content p {
+    margin-bottom: 24px;
+  }
+
+  .post-content h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 48px 0 20px;
+    color: var(--text);
+  }
+
+  .post-content h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 36px 0 16px;
+    color: var(--text);
+  }
+
+  .post-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: #B5C4E8;
+    transition: text-decoration-color 0.15s;
+  }
+
+  .post-content a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .post-content blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--highlight);
+    padding: 20px 24px;
+    margin: 32px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .post-content blockquote p {
+    font-family: 'Noto Serif KR', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 0;
+  }
+
+  .post-content pre {
+    background: #1A1714;
+    color: #F5F0E8;
+    padding: 24px;
+    border-radius: 4px;
+    margin: 32px 0;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .post-content code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--highlight);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+
+  .post-content pre code {
+    background: none;
+    padding: 0;
+    color: #F5F0E8;
+  }
+
+  .post-content ul, .post-content ol {
+    margin: 16px 0 24px 24px;
+  }
+
+  .post-content li {
+    margin-bottom: 8px;
+  }
+
+  .post-content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* === BLOG LIST PAGE === */
+  .blog-header {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 64px 24px 0;
+  }
+
+  .blog-header h1 {
+    font-family: 'Newsreader', serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  .blog-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .blog-filters button {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .blog-filters button.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .blog-list-items {
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .blog-list-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .blog-list-item:hover {
+    background: var(--highlight);
+    margin: 0 -16px;
+    padding: 32px 16px;
+  }
+
+  .blog-list-thumb {
+    width: 200px;
+    height: 130px;
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  .blog-list-info .blog-list-tag {
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .blog-list-info h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .blog-list-info .blog-list-excerpt {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .blog-list-info .blog-list-meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* === HIDDEN === */
+  .hidden { display: none; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 36px; }
+    .links-grid { grid-template-columns: 1fr; }
+    .post-item { flex-direction: column; gap: 4px; }
+    .post-date { min-width: unset; }
+    .post-tag { margin-left: 0; margin-top: 4px; }
+    .blog-list-item { grid-template-columns: 1fr; }
+    .blog-list-thumb { width: 100%; height: 180px; }
+    .post-page h1 { font-size: 28px; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid var(--border); border-radius: 4px; }
+    .newsletter-form button { border-radius: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">METAL AI</a>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="showPage('blog')">Blog</a></li>
+    <li><a href="#" onclick="showPage('post')">Post</a></li>
+    <li><a href="#">Education</a></li>
+    <li><a href="#">Wiki</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE SWITCHER -->
+<div class="page-switcher">
+  <button class="active" onclick="showPage('home')">홈페이지</button>
+  <button onclick="showPage('blog')">블로그 리스트</button>
+  <button onclick="showPage('post')">블로그 포스트</button>
+</div>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home">
+  <div class="hero">
+    <h1>METAL AI</h1>
+    <div class="subtitle">Work with AI, Build with AI</div>
+    <p class="description">
+      AI 에이전트 시스템, 콘텐츠 자동화, 경험 디자인에 대한 주간 인사이트를 전합니다.
+    </p>
+  </div>
+
+  <div class="divider"><hr></div>
+
+  <div class="section">
+    <div class="section-title">Recent</div>
+    <div class="post-list">
+      <a class="post-item" onclick="showPage('post')">
+        <span class="post-date">2026.04.13</span>
+        <span class="post-title-text">도메인 지식과 AI: 왜 전문가가 AI를 더 잘 쓰는가</span>
+        <span class="post-tag">Blog</span>
+      </a>
+      <a class="post-item">
+        <span class="post-date">2026.04.10</span>
+        <span class="post-title-text">MCP (Model Context Protocol) 완전 가이드</span>
+        <span class="post-tag">Wiki</span>
+      </a>
+      <a class="post-item">
+        <span class="post-date">2026.04.08</span>
+        <span class="post-title-text">Claude Code로 뉴스레터 자동화 시스템 구축하기</span>
+        <span class="post-tag">Blog</span>
+      </a>
+      <a class="post-item">
+        <span class="post-date">2026.04.05</span>
+        <span class="post-title-text">Vibe Coding (바이브 코딩) — 새로운 개발 패러다임</span>
+        <span class="post-tag">Wiki</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"><hr></div>
+
+  <div class="section">
+    <div class="section-title">Links</div>
+    <div class="links-grid">
+      <a class="link-card" href="#">
+        <span class="link-icon">▶</span>
+        <div>
+          <div class="link-name">YouTube</div>
+          <div class="link-desc">METAL AI LAB</div>
+        </div>
+      </a>
+      <a class="link-card" href="#">
+        <span class="link-icon">◎</span>
+        <div>
+          <div class="link-name">Instagram</div>
+          <div class="link-desc">AI 카드뉴스</div>
+        </div>
+      </a>
+      <a class="link-card" href="#">
+        <span class="link-icon">@</span>
+        <div>
+          <div class="link-name">Threads</div>
+          <div class="link-desc">매일 AI 인사이트</div>
+        </div>
+      </a>
+      <a class="link-card" href="#">
+        <span class="link-icon">✕</span>
+        <div>
+          <div class="link-name">X (Twitter)</div>
+          <div class="link-desc">AI 뉴스 & 트렌드</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BLOG LIST PAGE ==================== -->
+<div id="page-blog" class="hidden">
+  <div class="blog-header">
+    <h1>Blog</h1>
+    <div class="blog-filters">
+      <button class="active">전체</button>
+      <button>AI 인사이트</button>
+      <button>실험 & 리뷰</button>
+      <button>워크플로우</button>
+      <button>생각</button>
+    </div>
+  </div>
+
+  <div class="blog-list-items">
+    <a class="blog-list-item" onclick="showPage('post')">
+      <div class="blog-list-thumb"></div>
+      <div class="blog-list-info">
+        <div class="blog-list-tag">AI 인사이트</div>
+        <h3>도메인 지식과 AI: 왜 전문가가 AI를 더 잘 쓰는가</h3>
+        <p class="blog-list-excerpt">AI가 모든 것을 자동화할 수 있다는 환상이 있지만, 실제로 AI를 가장 잘 활용하는 사람은 해당 분야의 전문가입니다. 그 이유를 분석합니다.</p>
+        <span class="blog-list-meta">2026.04.13 · 5분 읽기</span>
+      </div>
+    </a>
+    <a class="blog-list-item">
+      <div class="blog-list-thumb"></div>
+      <div class="blog-list-info">
+        <div class="blog-list-tag">워크플로우</div>
+        <h3>Claude Code로 뉴스레터 자동화 시스템 구축하기</h3>
+        <p class="blog-list-excerpt">Buttondown + Quartz + Vercel을 연결해서 뉴스레터 시스템을 구축한 전체 과정을 공유합니다.</p>
+        <span class="blog-list-meta">2026.04.08 · 8분 읽기</span>
+      </div>
+    </a>
+    <a class="blog-list-item">
+      <div class="blog-list-thumb"></div>
+      <div class="blog-list-info">
+        <div class="blog-list-tag">실험 & 리뷰</div>
+        <h3>AI 에이전트 프레임워크 비교: CrewAI vs LangGraph vs AutoGen</h3>
+        <p class="blog-list-excerpt">실제 프로젝트에서 세 가지 프레임워크를 사용해보고, 각각의 장단점과 적합한 사용 사례를 정리했습니다.</p>
+        <span class="blog-list-meta">2026.04.01 · 12분 읽기</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ==================== BLOG POST PAGE ==================== -->
+<div id="page-post" class="hidden">
+  <div class="post-page">
+    <div class="post-meta">
+      <span class="tag">AI 인사이트</span>
+      <span class="date">2026.04.13</span>
+      <span class="reading-time">· 5분 읽기</span>
+    </div>
+    <h1>도메인 지식과 AI: 왜 전문가가 AI를 더 잘 쓰는가</h1>
+    <p class="post-subtitle">AI가 모든 것을 자동화할 수 있다는 환상이 있지만, 실제로 AI를 가장 잘 활용하는 사람은 해당 분야의 전문가입니다.</p>
+
+    <div class="divider" style="padding:0; margin-bottom:40px;"><hr></div>
+
+    <div class="post-content">
+      <p>최근 AI 도구들이 폭발적으로 성장하면서, "AI가 전문가를 대체할 것"이라는 이야기가 많습니다. 하지만 실제로 현장에서 AI를 써보면 정반대의 현상이 나타납니다.</p>
+
+      <h2>AI는 도구이고, 도구는 사용자의 실력을 증폭한다</h2>
+
+      <p>포토샵이 처음 나왔을 때를 떠올려봅시다. 포토샵은 누구나 사용할 수 있는 도구였지만, 진짜 뛰어난 결과물을 만든 것은 <strong>이미 디자인 감각을 갖춘 사람들</strong>이었습니다. AI도 마찬가지입니다.</p>
+
+      <blockquote>
+        <p>"도구를 이해하는 사람이 도구를 지배한다." — 이것은 AI 시대에도 변하지 않는 진리입니다.</p>
+      </blockquote>
+
+      <p>AI가 아무리 좋은 답변을 생성해도, 그 답변의 <strong>품질을 판단하고</strong>, <strong>맥락에 맞게 수정</strong>하고, <strong>실제 업무에 적용</strong>하는 것은 사람의 몫입니다. 바로 여기서 도메인 지식의 차이가 극명하게 드러납니다.</p>
+
+      <h2>전문가가 AI를 더 잘 쓰는 3가지 이유</h2>
+
+      <h3>1. 프롬프트의 질이 다르다</h3>
+
+      <p>도메인 전문가는 정확한 용어, 구체적인 맥락, 명확한 기대 결과를 프롬프트에 담을 수 있습니다. "좋은 마케팅 전략 알려줘"와 "B2B SaaS의 PLG 전략에서 activation rate를 개선할 수 있는 온보딩 UX 패턴 5가지"는 완전히 다른 결과를 만듭니다.</p>
+
+      <h3>2. AI의 실수를 잡아낼 수 있다</h3>
+
+      <p>AI는 <a href="#">hallucination</a>을 일으킬 수 있고, 미묘하게 틀린 정보를 자신있게 전달하기도 합니다. 전문가는 이런 오류를 즉시 포착할 수 있지만, 비전문가는 그대로 수용할 위험이 있습니다.</p>
+
+      <h3>3. 결과물을 조합하는 능력</h3>
+
+      <p>AI의 출력물은 그 자체로 완성품이 아닙니다. 여러 AI 출력물을 엮어서 하나의 coherent한 결과물로 만드는 것은 전문가만이 할 수 있는 일입니다.</p>
+
+      <pre><code># AI 활용의 레벨
+Level 1: AI에게 물어보기 (누구나)
+Level 2: 좋은 프롬프트 작성 (학습 필요)
+Level 3: AI 출력물 품질 판단 (도메인 지식)
+Level 4: AI 워크플로우 설계 (시스템 사고)
+Level 5: AI 에이전트 구축 (기술 + 도메인)</code></pre>
+
+      <h2>결론: AI 시대의 핵심 역량은 "도메인 전문성 + AI 활용력"</h2>
+
+      <p>AI를 잘 쓰기 위해 가장 먼저 해야 할 일은 프롬프트 엔지니어링을 배우는 것이 아닙니다. <strong>자기 분야에서 진짜 전문가가 되는 것</strong>입니다. 그 위에 AI 활용 능력을 얹었을 때, 비로소 AI가 당신의 실력을 10배로 증폭시켜 줄 것입니다.</p>
+    </div>
+
+    <div style="margin-top: 64px;">
+      <div class="divider" style="padding:0;"><hr></div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER (shared) -->
+<div class="newsletter">
+  <div class="newsletter-inner">
+    <h3>뉴스레터 구독하기</h3>
+    <p>AI로 일하는 법을 연구하고 공유합니다.<br>매주 엄선한 AI 인사이트를 보내드립니다.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com">
+      <button>Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 METAL AI</div>
+  <div class="footer-links">
+    <a href="#">YouTube</a>
+    <a href="#">Instagram</a>
+    <a href="#">Threads</a>
+    <a href="#">X</a>
+  </div>
+</footer>
+
+<script>
+function showPage(page) {
+  document.getElementById('page-home').classList.add('hidden');
+  document.getElementById('page-blog').classList.add('hidden');
+  document.getElementById('page-post').classList.add('hidden');
+
+  document.getElementById('page-' + page).classList.remove('hidden');
+
+  // Update page switcher buttons
+  document.querySelectorAll('.page-switcher button').forEach(btn => btn.classList.remove('active'));
+  const buttons = document.querySelectorAll('.page-switcher button');
+  if (page === 'home') buttons[0].classList.add('active');
+  if (page === 'blog') buttons[1].classList.add('active');
+  if (page === 'post') buttons[2].classList.add('active');
+
+  // Update nav links
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
