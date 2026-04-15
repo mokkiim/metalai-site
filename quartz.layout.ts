@@ -4,7 +4,7 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [Component.Newsletter()],
   footer: Component.Footer({
     links: {
       "YouTube": "https://www.youtube.com/@metalailab",
