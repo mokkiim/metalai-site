@@ -4,12 +4,12 @@ import * as Plugin from "./quartz/plugins"
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "METAL AI",
-    pageTitleSuffix: " | METAL AI",
+    pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
       provider: "google",
-      tagId: "G-XXXXXXXXXX",
+      tagId: "G-37CDSVCN7P",
     },
     locale: "ko-KR",
     baseUrl: "metalai.co.kr",
