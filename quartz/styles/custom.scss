@@ -87,14 +87,29 @@ h1, h2, h3, h4, h5, h6, thead {
 }
 
 // ============================================================
-// 6. ARTICLE TITLE — Newsreader hero feel
+// 6. HIDE INDEX ARTICLE CONTENT (Homepage component replaces it)
+// ============================================================
+// When Homepage component renders, we hide the markdown article on index
+// Quartz adds data-slug to body or we use the .homepage presence
+.homepage ~ article,
+.homepage ~ .content-meta {
+  display: none !important;
+}
+
+// Also hide any article that follows the homepage div
+// The center > article on index page
+body:has(.homepage) .center > article {
+  display: none !important;
+}
+
+// ============================================================
+// 7. ARTICLE TITLE — For non-index pages
 // ============================================================
 h1.article-title {
-  font-family: 'Newsreader', var(--font-heading) !important;
-  font-size: 56px;
+  font-family: 'Noto Serif KR', serif !important;
+  font-size: 40px;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  line-height: 1.25;
   text-shadow: none;
   color: var(--color-text-primary);
   margin-bottom: 16px;
@@ -106,7 +121,7 @@ h1.article-title {
 }
 
 // ============================================================
-// 7. ARTICLE BODY — 680px reading width
+// 8. ARTICLE BODY — 680px reading width (blog posts)
 // ============================================================
 article {
   max-width: var(--content-width);
@@ -114,27 +129,24 @@ article {
   line-height: 1.85;
   font-size: 17px;
 
-  // --- Homepage article gets full width ---
-  // (Quartz renders index.md content inside article)
-
+  // Blog post h2 — full size (not uppercase label)
   h2 {
     font-family: 'Noto Serif KR', serif;
-    font-size: 14px;
+    font-size: 26px;
     font-weight: 600;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 48px;
-    margin-bottom: 32px;
+    color: var(--color-text-primary);
+    margin: 48px 0 20px;
     padding-bottom: 0;
     border-bottom: none;
+    text-transform: none;
+    letter-spacing: normal;
   }
 
   h3 {
     font-family: 'Noto Serif KR', serif;
-    font-size: 1.25rem;
-    margin-top: 2.2rem;
+    font-size: 20px;
     font-weight: 600;
+    margin: 36px 0 16px;
     color: var(--color-text-primary);
   }
 
@@ -146,12 +158,12 @@ article {
     margin: 32px 0;
     border-radius: 0 4px 4px 0;
     box-shadow: none;
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: 17px;
-    line-height: 1.7;
 
     p {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.7;
       margin-bottom: 0;
     }
   }
@@ -231,44 +243,11 @@ article {
     margin-bottom: 8px;
   }
 
-  // HR inside article
   hr {
     border: none;
     border-top: 1px solid var(--color-border-default);
     margin: 0;
-    // In prototype, dividers separate hero/recent/links sections
   }
-}
-
-// ============================================================
-// 8. HOMEPAGE — Proto hero + sections (rendered from index.md)
-//    index.md content becomes: h1 (hero), h2 (section titles),
-//    ul (lists), blockquote, hr (dividers)
-// ============================================================
-
-// On homepage, article title is hidden (h1 inside article is the hero)
-// Quartz shows .article-title from frontmatter title
-// We want the content's h1 "METAL AI" to be the hero instead
-
-// Homepage: wider article for sections
-// The index page slug detection via CSS is limited,
-// but we can style the first h1 inside article as hero
-
-article > h1:first-child {
-  font-family: 'Newsreader', serif !important;
-  font-size: 56px;
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-
-// Subtitle style — the bold text after h1
-article > p:first-of-type strong {
-  font-family: 'Pretendard', sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  color: var(--color-text-secondary);
-  letter-spacing: 0.02em;
 }
 
 // ============================================================
@@ -335,7 +314,7 @@ a.internal.tag-link {
 }
 
 // ============================================================
-// 11. NEWSLETTER — Centered
+// 11. NEWSLETTER — Centered (matching prototype)
 // ============================================================
 .newsletter-section {
   max-width: 560px !important;
@@ -346,7 +325,7 @@ a.internal.tag-link {
 }
 
 // ============================================================
-// 12. FOOTER — Proto-faithful (flex, space-between)
+// 12. FOOTER — Proto-faithful
 // ============================================================
 footer {
   font-family: var(--font-body);
@@ -405,19 +384,11 @@ img {
 // ============================================================
 @media (max-width: 800px) {
   h1.article-title {
-    font-size: 36px;
-  }
-
-  article > h1:first-child {
-    font-size: 36px !important;
+    font-size: 28px;
   }
 
   .page-header {
     padding: 20px 0;
-  }
-
-  .page-logo {
-    height: 20px !important;
   }
 
   article {

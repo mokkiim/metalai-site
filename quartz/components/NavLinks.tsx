@@ -13,21 +13,50 @@ const NavLinks: QuartzComponent = ({ fileData, displayClass }: QuartzComponentPr
   ]
 
   return (
-    <nav class={`nav-links ${displayClass ?? ""}`}>
-      {links.map((link) => (
-        <a href={link.href} class="nav-link">
-          {link.name}
-        </a>
-      ))}
+    <nav class={`site-nav ${displayClass ?? ""}`}>
+      <a href={baseDir} class="site-logo">METAL AI</a>
+      <ul class="nav-links">
+        {links.map((link) => (
+          <li>
+            <a href={link.href} class="nav-link">
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
     </nav>
   )
 }
 
 NavLinks.css = `
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.site-logo {
+  font-family: 'Newsreader', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--brand-navy, #19297B);
+  text-decoration: none !important;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.site-logo:hover {
+  color: var(--brand-navy-dark, #0F1A52);
+}
+
 .nav-links {
   display: flex;
   gap: 32px;
   align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
@@ -48,9 +77,11 @@ NavLinks.css = `
     gap: 16px;
     flex-wrap: wrap;
   }
-
   .nav-link {
     font-size: 14px;
+  }
+  .site-logo {
+    font-size: 18px;
   }
 }
 `

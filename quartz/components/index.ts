@@ -25,6 +25,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import Newsletter from "./Newsletter"
 import NavLinks from "./NavLinks"
+import Homepage from "./Homepage"
 
 export {
   ArticleTitle,
@@ -54,4 +55,5 @@ export {
   ConditionalRender,
   Newsletter,
   NavLinks,
+  Homepage,
 }
