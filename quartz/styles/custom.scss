@@ -1,3 +1,230 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// ===== METAL AI · 8-BIT PIXEL AESTHETIC =====
+// Brand: #19297b (Deep Navy Blue) + Retro Pixel Vibes
+
+// --- Pixel Font Import (backup for code blocks) ---
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+// --- Page Title ---
+h1.article-title {
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  text-shadow: 2px 2px 0px rgba(25, 41, 123, 0.15);
+}
+
+// --- Site Header (Pixel Logo Style) ---
+.page-title {
+  font-size: 0.9rem !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px rgba(25, 41, 123, 0.2);
+}
+
+// --- 8-Bit Pixel Border Style ---
+@mixin pixel-border($color: var(--secondary), $size: 3px) {
+  border: $size solid $color;
+  box-shadow: 
+    $size $size 0px 0px $color;
+}
+
+// --- Explorer (Pixel Card) ---
+.explorer {
+  @include pixel-border(var(--lightgray));
+  border-radius: 0px; // Pixel = no radius!
+  padding: 0.5rem;
+}
+
+// --- Smooth Link Hover with Pixel Feel ---
+a {
+  transition: all 0.15s ease;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  
+  &:hover {
+    color: var(--tertiary);
+    text-shadow: 1px 1px 0px rgba(25, 41, 123, 0.1);
+  }
+}
+
+// --- Content Area ---
+article {
+  line-height: 1.85;
+  
+  h2 {
+    margin-top: 2.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--secondary);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  h3 {
+    font-size: 0.85rem;
+    margin-top: 1.8rem;
+    color: var(--secondary);
+  }
+
+  // --- Pixel Blockquote ---
+  blockquote {
+    @include pixel-border(var(--secondary), 2px);
+    border-radius: 0;
+    background: var(--highlight);
+    padding: 1rem 1.2rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.3rem;
+    letter-spacing: 0.03em;
+    font-style: normal;
+  }
+
+
+  // --- Pixel Table ---
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    @include pixel-border(var(--secondary), 2px);
+    border-radius: 0;
+
+    th {
+      background: var(--secondary);
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.55rem;
+      padding: 0.8rem 0.8rem;
+      text-align: left;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 2px solid var(--lightgray);
+      font-size: 0.95rem;
+    }
+
+    tr:hover td {
+      background: var(--highlight);
+    }
+  }
+
+  // --- Code Blocks (VT323 Pixel Font) ---
+  code {
+    font-family: 'VT323', monospace;
+    font-size: 1.15rem;
+    background: var(--highlight);
+    padding: 0.1rem 0.4rem;
+    border: 1px solid var(--lightgray);
+  }
+
+  pre code {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    @include pixel-border(var(--lightgray), 2px);
+    border-radius: 0;
+  }
+
+  strong {
+    color: var(--secondary);
+    font-weight: 700;
+  }
+}
+
+
+// --- Severance × 8-Bit: Clinical Retro Vibes ---
+
+// Graph View (Lumon Data Map Feel)
+.graph > svg {
+  border: 2px solid var(--secondary);
+  border-radius: 0;
+  background: var(--light);
+}
+
+// --- Search Box (Lumon Terminal) ---
+.search-bar input {
+  border-radius: 0;
+  border: 2px solid var(--secondary);
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  padding: 0.5rem 0.8rem;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    border-color: var(--secondary);
+    box-shadow: 3px 3px 0px 0px var(--secondary);
+    outline: none;
+  }
+}
+
+// --- Tag Pills (Department Badges) ---
+a.internal.tag-link {
+  border-radius: 0;
+  border: 2px solid var(--secondary);
+  padding: 0.15rem 0.6rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.15s ease;
+  
+  &:hover {
+    background: var(--secondary);
+    color: white;
+    box-shadow: 2px 2px 0px 0px var(--secondary);
+  }
+}
+
+// --- Footer (Severance End Credits) ---
+footer {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  border-top: 2px solid var(--secondary);
+  padding-top: 1.2rem;
+  margin-top: 3rem;
+}
+
+// --- HR Dividers (Lumon Floor Markers) ---
+hr {
+  border: none;
+  border-top: 3px solid var(--secondary);
+  margin: 2rem 0;
+}
+
+// --- Backlinks (Severance File Cabinet) ---
+.backlinks {
+  border: 2px solid var(--secondary);
+  border-radius: 0;
+  padding: 1rem;
+  
+  & > h3 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+  }
+}
+
+// --- Table of Contents (Lumon Department Guide) ---
+.toc .depth-1 > li {
+  font-weight: 600;
+}
+
+// --- Cursor Blink Effect for Pixel Feel ---
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+// --- Responsive ---
+@media (max-width: 800px) {
+  h1.article-title {
+    font-size: 1rem;
+  }
+  
+  .page-title {
+    font-size: 0.7rem !important;
+  }
+}
