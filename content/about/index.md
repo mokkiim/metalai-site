@@ -58,8 +58,8 @@ AX(AI Experience) Engineer. AI 에이전트 시스템으로 콘텐츠 생산의 
 
 - **Web**: [metalai.co.kr](https://metalai.co.kr)
 - **YouTube**: [METAL AI LAB](https://www.youtube.com/@metalailab)
-- **Threads**: [@metalai.lab](https://www.threads.net/@metalai.lab)
-- **Instagram**: [@metalai.lab](https://www.instagram.com/metalai.lab)
+- **Threads**: [@metalailab](https://www.threads.net/@metalailab)
+- **Instagram**: [@metalailab](https://www.instagram.com/metalailab/)
 - **X**: [@metalailab](https://x.com/metalailab)
 - **LinkedIn**: [linkedin.com/in/metalai](https://linkedin.com/in/metalai)
 - **Location**: Seoul, South Korea
