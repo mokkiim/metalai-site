@@ -2,20 +2,22 @@
 
 // ===== METAL AI · Prototype-Faithful "Minimal + Impact" =====
 // 100% matching metalai-prototype.html
-// Single-column · 1100px max · Anthropic warm cream editorial
+// Single-column · 1100px max · Neutral Newsprint editorial
+// 2026-04-16 · Warm Cream → Neutral Newsprint Gray (B4)
+//   유저 모니터 밝기 60~70% 기준 역산. 스크린 위에서 "신문지 톤"으로 앉게 설계.
 
 // --- Design Tokens (matching prototype :root) ---
 :root {
   --brand-navy: #19297B;
   --brand-navy-light: #2D3F9E;
   --brand-navy-dark: #0F1A52;
-  --color-bg-primary: #F5F0E8;
-  --color-bg-secondary: #FAF8F4;
-  --color-bg-tertiary: #F0E6D8;
+  --color-bg-primary: #EFEDEA;      // B4 · 신문지 그레이 (was #F5F0E8)
+  --color-bg-secondary: #F4F2EF;    // 살짝 밝은 블록 배경 (was #FAF8F4)
+  --color-bg-tertiary: #E1DFDB;     // 강조 블록/블록쿼트 (was #F0E6D8)
   --color-text-primary: #1A1A1A;
-  --color-text-secondary: #6B6560;
-  --color-border-default: #E5DED4;
-  --color-border-strong: #C8BFB2;
+  --color-text-secondary: #5E5C58;  // 중성화 (was #6B6560)
+  --color-border-default: #CBC9C4;  // (was #E5DED4)
+  --color-border-strong: #ACACA6;   // (was #C8BFB2)
   --font-heading: 'Noto Serif KR', 'Newsreader', Georgia, serif;
   --font-body: 'Pretendard', -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;

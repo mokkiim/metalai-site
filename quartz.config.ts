@@ -30,16 +30,19 @@ const config: QuartzConfig = {
         code: "JetBrains Mono",
       },
       colors: {
+        // 2026-04-16 · Neutral Newsprint Gray (B4)
+        // 기존 Warm Cream(#F5F0E8) → 중성 뉴스프린트 그레이(#EFEDEA)
+        // 유저 모니터 밝기(60~70%) 기준 역산 → B4에서 실제 "신문지 톤"으로 떨어짐
         lightMode: {
-          light: "#F5F0E8",
-          lightgray: "#E5DED4",
-          gray: "#C8BFB2",
+          light: "#EFEDEA",
+          lightgray: "#E1DFDB",
+          gray: "#C3C1BC",
           darkgray: "#1A1A1A",
           dark: "#1A1A1A",
           secondary: "#19297B",
           tertiary: "#2D3F9E",
           highlight: "rgba(25, 41, 123, 0.06)",
-          textHighlight: "#F0E6D8",
+          textHighlight: "#E1DFDB",
         },
         darkMode: {
           light: "#1A1714",
